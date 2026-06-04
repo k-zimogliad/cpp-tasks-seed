@@ -6,7 +6,7 @@
 int main(int argc, const char* argv[])
 {
     if (argc < 2)
-	{
+    {
         std::cerr << "Ошибка: Не указан путь к файлу данных СЛАУ.\n";
         std::cerr << "Использование: " << argv[0] << " <input_matrix.csv>\n";
         return 1;

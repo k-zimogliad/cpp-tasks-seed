@@ -23,9 +23,9 @@ GaussMatrix load_csv_to_matrix(const char* filename)
     GaussMatrix matrix(rcsv.size(), rcsv.begin()->size());
 
     for (size_t i = 0; i < rcsv.size(); ++i)
-	{
+    {
         for (size_t j = 0; j < rcsv[i].size(); ++j)
-	{
+        {
             matrix(i, j) = rcsv[i][j];
         }
     }

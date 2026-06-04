@@ -40,7 +40,7 @@ TEST(GaussSolve, SingularMatrixThrowsException)
 {
     GaussMatrix ab(2, 3);
     ab << 1, 2, 3,
-    2, 4, 6; 
+    2, 4, 6;
 
     EXPECT_THROW(Gauss_solve(ab), std::runtime_error);
 }
@@ -105,7 +105,7 @@ TEST(GaussSolve, LargeRandomSolve)
     for (int i = 0; i < N; ++i)
     {
         for (int j = 0; j <= N; ++j)
- 	{
+        {
             ab(i, j) = dis(gen);
         }
     }
