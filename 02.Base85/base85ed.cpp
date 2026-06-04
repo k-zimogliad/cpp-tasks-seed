@@ -11,9 +11,9 @@ namespace base85
 
     constexpr uint32_t POW85[] = { 85 * 85 * 85 * 85, 85 * 85 * 85, 85 * 85, 85, 1 };
 
-    std::vector<uint32_t> encode(std::vector<uint8_t> const& bytes)
+    std::vector<uint8_t> encode(std::vector<uint8_t> const& bytes)
     {
-        std::vector<uint8_t> out;
+        std::vector<uint8_t> out; 
         size_t i = 0;
         size_t len = bytes.size();
 
@@ -43,10 +43,10 @@ namespace base85
             i += chunk_size;
         }
 
-        return std::vector<uint32_t>(out.begin(), out.end());
+        return std::vector<uint8_t>(out.begin(), out.end()); 
     }
 
-    std::vector<uint32_t> decode(std::vector<uint8_t> const& b85str)
+    std::vector<uint8_t> decode(std::vector<uint8_t> const& b85str) 
     {
         std::vector<uint8_t> out;
         size_t i = 0;
@@ -90,7 +90,7 @@ namespace base85
             i += chunk_size;
         }
 
-        return std::vector<uint32_t>(out.begin(), out.end());
+        return std::vector<uint8_t>(out.begin(), out.end()); 
     }
 
 }
