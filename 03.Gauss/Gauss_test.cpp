@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include <Eigen/Dense>
 #include "Gauss_solve.h"
-#include "util.h"
 
 // Базовая проверка 
 TEST(GaussSolve, SmallDeterministicSolve)

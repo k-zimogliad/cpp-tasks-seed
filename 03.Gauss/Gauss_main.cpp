@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <Eigen/Dense>
-#include "util.h"
 #include "Gauss_solve.h"
 
 int main(int argc, const char* argv[])
