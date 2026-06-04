@@ -4,13 +4,13 @@
 #include <Eigen/Dense>
 #include "Gauss_solve.h"
 
-// Базовая проверка 
+// Базовая проверка
 TEST(GaussSolve, SmallDeterministicSolve)
 {
     GaussMatrix ab(3, 4);
     ab << 2, 1, -1, 8,
-        -3, -1, 2, -11,
-        -2, 1, 2, -3;
+    -3, -1, 2, -11,
+    -2, 1, 2, -3;
 
     GaussVector expected(3);
     expected << 2, 3, -1;
@@ -25,7 +25,7 @@ TEST(GaussSolve, RequiresPivoting)
 {
     GaussMatrix ab(2, 3);
     ab << 0, 2, 4,
-        3, 2, 7;
+    3, 2, 7;
 
     GaussVector expected(2);
     expected << 1, 2;
@@ -40,7 +40,7 @@ TEST(GaussSolve, SingularMatrixThrowsException)
 {
     GaussMatrix ab(2, 3);
     ab << 1, 2, 3,
-        2, 4, 6; 
+    2, 4, 6; 
 
     EXPECT_THROW(Gauss_solve(ab), std::runtime_error);
 }
@@ -50,9 +50,9 @@ TEST(GaussSolve, IdentityMatrix)
 {
     GaussMatrix ab(4, 5);
     ab << 1, 0, 0, 0, 5.5,
-        0, 1, 0, 0, -2.1,
-        0, 0, 1, 0, 0.0,
-        0, 0, 0, 1, 9.9;
+    0, 1, 0, 0, -2.1,
+    0, 0, 1, 0, 0.0,
+    0, 0, 0, 1, 9.9;
 
     GaussVector expected(4);
     expected << 5.5, -2.1, 0.0, 9.9;
@@ -72,14 +72,16 @@ TEST(GaussSolve, RandomGeneratorReproducibility)
     std::mt19937 gen1(seed);
     std::uniform_real_distribution<double> dis(-5.0, 5.0);
     GaussMatrix ab1(N, N + 1);
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; ++i)
+    {
         for (int j = 0; j <= N; ++j) ab1(i, j) = dis(gen1);
     }
 
     // Сборка второй системы
     std::mt19937 gen2(seed);
     GaussMatrix ab2(N, N + 1);
-    for (int i = 0; i < N; ++i) {
+    for (int i = 0; i < N; ++i)
+    {
         for (int j = 0; j <= N; ++j) ab2(i, j) = dis(gen2);
     }
 
@@ -88,7 +90,7 @@ TEST(GaussSolve, RandomGeneratorReproducibility)
     GaussVector res1 = Gauss_solve(ab1);
     GaussVector res2 = Gauss_solve(ab2);
 
-    EXPECT_EQ(res1, res2); // Результаты должны совпадать 
+    EXPECT_EQ(res1, res2); // Результаты должны совпадать
 }
 
 // Стресс-тест на большой случайной матрице
@@ -100,8 +102,10 @@ TEST(GaussSolve, LargeRandomSolve)
     std::uniform_real_distribution<double> dis(-50.0, 50.0);
 
     GaussMatrix ab(N, N + 1);
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j <= N; ++j) {
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j <= N; ++j)
+ 	{
             ab(i, j) = dis(gen);
         }
     }
@@ -109,7 +113,7 @@ TEST(GaussSolve, LargeRandomSolve)
     GaussMatrix ab_copy = ab;
     GaussVector our_result = Gauss_solve(ab);
 
-    // Эталонное решение 
+    // Эталонное решение
     Eigen::MatrixXd A = ab_copy.leftCols(N);
     Eigen::VectorXd b = ab_copy.col(N);
     Eigen::VectorXd reference_result = A.partialPivLu().solve(b);
