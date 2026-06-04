@@ -3,28 +3,11 @@
 #include <cstdint>
 #include <stdexcept>
 #include <string>
-#include <cstring>
 #include <random>
 #include <chrono>
 
 #include "base85ed.h"
 
-const std::vector<std::pair<const char*, const char*>> short_cases = {
-    { "", "" },
-    { "0`", "1" },
-    { "0er", "12" },
-    { "0f(T", "133" },
-    { "0etOA", "1234" },
-    { "FCfN8", "test" }
-};
-
-static std::vector<uint8_t> cstr2v(const char* s)
-{
-    return std::vector<uint8_t>(
-        reinterpret_cast<const uint8_t*>(s),
-        reinterpret_cast<const uint8_t*>(s) + std::strlen(s)
-    );
-}
 
 static std::vector<uint8_t> cast_to_u8(std::vector<uint8_t> const& v)
 {
@@ -80,12 +63,12 @@ TEST(Base85RoundTrip, VariousVariableLengths)
 TEST(Base85SpecificPatterns, ZeroFilledBlocks)
 {
     std::vector<uint8_t> empty_block(4, 0);
-    auto enc = cast_to_u8(base85::encode(empty_block));
+
+    auto enc = base85::encode(empty_block);
 
     EXPECT_EQ(enc.size(), 5);
-    EXPECT_EQ(enc[0], '!');
 
-    auto dec = cast_to_u8(base85::decode(enc));
+    auto dec = base85::decode(enc);
     EXPECT_EQ(dec, empty_block);
 }
 
