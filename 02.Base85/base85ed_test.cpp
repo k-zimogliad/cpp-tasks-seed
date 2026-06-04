@@ -143,7 +143,8 @@ TEST(Base85EdgeCases, ExhaustiveByteRange)
 
 TEST(Base85Validation, MalformedCharacters)
 {
-    std::vector<uint8_t> invalid_chars = {
+    std::vector<uint8_t> invalid_chars =
+    {
         0x00,
         0x1F,
         0x7F
