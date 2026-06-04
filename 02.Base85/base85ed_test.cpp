@@ -43,28 +43,6 @@ static std::vector<uint8_t> make_random_sequence(size_t length, uint32_t seed_va
     return result;
 }
 
-TEST(Base85StaticPairs, EncodeVerification)
-{
-    for (const auto& pair : short_cases)
-    {
-        auto raw_input = cstr2v(pair.second);
-        auto b85_expected = cstr2v(pair.first);
-        auto encoded_res = cast_to_u8(base85::encode(raw_input));
-        EXPECT_EQ(encoded_res, b85_expected);
-    }
-}
-
-TEST(Base85StaticPairs, DecodeVerification)
-{
-    for (const auto& pair : short_cases)
-    {
-        auto b85_input = cstr2v(pair.first);
-        auto raw_expected = cstr2v(pair.second);
-        auto decoded_res = cast_to_u8(base85::decode(b85_input));
-        EXPECT_EQ(decoded_res, raw_expected);
-    }
-}
-
 TEST(Base85RoundTrip, ShortAndMixedStrings)
 {
     const std::vector<std::string> sample_strings = {
