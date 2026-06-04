@@ -28,7 +28,7 @@ static std::vector<uint8_t> make_random_sequence(size_t length, uint32_t seed_va
 
 TEST(Base85RoundTrip, ShortAndMixedStrings)
 {
-    const std::vector<std::string> sample_strings = 
+    const std::vector<std::string> sample_strings =
     {
         "A", "AB", "ABC", "ABCD", "ABCDE",
         "Modern C++", "Base85 Specification",
@@ -153,7 +153,7 @@ TEST(Base85Validation, MalformedCharacters)
 
     for (uint8_t bad_char : invalid_chars)
     {
-        std::vector<uint8_t> invalid_input = 
+        std::vector<uint8_t> invalid_input =
         {
             'c', 'e', '`', 'E', bad_char
         };
