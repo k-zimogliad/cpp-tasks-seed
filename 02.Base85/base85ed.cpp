@@ -23,9 +23,13 @@ namespace base85
             if (chunk_size > 4) chunk_size = 4;
 
             uint32_t value = 0;
-            for (size_t j = 0; j < chunk_size; ++j)
+            for (size_t j = 0; j < 4; ++j)
             {
-                value |= static_cast<uint32_t>(bytes[i + j]) << (24 - j * 8);
+                value << = 8;
+                if (j < chunk_size)
+                {
+                    value |= bytes[i + j];
+                }
             }
 
             uint8_t encoded_chunk[5];
@@ -63,24 +67,22 @@ namespace base85
             }
 
             uint32_t value = 0;
-            for (size_t j = 0; j < chunk_size; ++j)
+            for (size_t j = 0; j < 5; ++j)
             {
-                uint32_t c = b85str[i + j] & 0xFF;
-                if (c < '!' || c > 'u')
+                uint32_t c;
+                if (j < chunk_size)
                 {
-                    throw std::runtime_error("Invalid character in Base85 string.");
+                    c = b85str[i + j] & 0xFF;
+                    if (c < '!' || c > 'u')
+                    {
+                        throw std::runtime_error("Invalid character in Base85 string.");
+                    }
                 }
-
+                else
+                {
+                    c = 'u';
+                }
                 value += (c - '!') * POW85[j];
-            }
-
-            if (chunk_size < 5)
-            {
-
-                for (size_t j = chunk_size; j < 5; ++j)
-                {
-                    value += static_cast<uint32_t>(0) * POW85[j];
-                }
             }
 
             size_t bytes_to_write = chunk_size - 1;
