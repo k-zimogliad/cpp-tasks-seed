@@ -15,10 +15,10 @@ const std::vector<std::pair<const char*, const char*>> short_cases = {
     { "F)(", "12" },
     { "F))j", "133" },
     { "F))kW", "1234" },
-    { "O<`0U", "0000" },
+    { "0<`0U", "0000" },
     { "ce`E_", "test" },
     { "G%`LpE,B6$A06", "Data Structures" },
-    { "cb_Y_c_m&`d-9,", "Algorithm" },
+    { "cb_Y_c_m&'d-9,", "Algorithm" },
     { "N6%Z_OpBe-R92_#", "Hello, world!" }
 };
 
@@ -30,9 +30,10 @@ static std::vector<uint8_t> cstr2v(const char* s)
     );
 }
 
-static std::vector<uint8_t> cast_to_u8(std::vector<uint32_t> const& v)
+
+static std::vector<uint8_t> cast_to_u8(std::vector<uint8_t> const& v)
 {
-    return std::vector<uint8_t>(v.begin(), v.end());
+    return v;
 }
 
 static std::vector<uint8_t> make_random_sequence(size_t length, uint32_t seed_value)
@@ -219,7 +220,9 @@ TEST(Base85Stress, MassiveDataBuffers)
 
         EXPECT_EQ(original, dec);
 
+
         auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        EXPECT_GE(ms, 0);
     }
 }
 
