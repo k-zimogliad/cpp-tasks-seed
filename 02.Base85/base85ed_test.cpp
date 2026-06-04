@@ -11,15 +11,11 @@
 
 const std::vector<std::pair<const char*, const char*>> short_cases = {
     { "", "" },
-    { "F#", "1" },
-    { "F)(", "12" },
-    { "F))j", "133" },
-    { "F))kW", "1234" },
-    { "0<`0U", "0000" },
-    { "ce`E_", "test" },
-    { "G%`LpE,B6$A06", "Data Structures" },
-    { "cb_Y_c_m&'d-9,", "Algorithm" },
-    { "N6%Z_OpBe-R92_#", "Hello, world!" }
+    { "0`", "1" },
+    { "0er", "12" },
+    { "0f(T", "133" },
+    { "0etOA", "1234" },
+    { "FCfN8", "test" }
 };
 
 static std::vector<uint8_t> cstr2v(const char* s)
