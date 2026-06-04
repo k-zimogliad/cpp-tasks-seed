@@ -13,7 +13,7 @@ namespace base85
 
     std::vector<uint8_t> encode(std::vector<uint8_t> const& bytes)
     {
-        std::vector<uint8_t> out; 
+        std::vector<uint8_t> out;
         size_t i = 0;
         size_t len = bytes.size();
 
@@ -43,10 +43,10 @@ namespace base85
             i += chunk_size;
         }
 
-        return std::vector<uint8_t>(out.begin(), out.end()); 
+        return out;
     }
 
-    std::vector<uint8_t> decode(std::vector<uint8_t> const& b85str) 
+    std::vector<uint8_t> decode(std::vector<uint8_t> const& b85str)
     {
         std::vector<uint8_t> out;
         size_t i = 0;
@@ -65,12 +65,12 @@ namespace base85
             uint32_t value = 0;
             for (size_t j = 0; j < chunk_size; ++j)
             {
-                uint8_t c = b85str[i + j];
+                uint32_t c = b85str[i + j] & 0xFF; 
                 if (c < '!' || c > 'u')
                 {
                     throw std::runtime_error("Invalid character in Base85 string.");
                 }
-                value += static_cast<uint32_t>(c - '!') * POW85[j + (5 - chunk_size)];
+                value += (c - '!') * POW85[j + (5 - chunk_size)];
             }
 
             if (chunk_size < 5)
@@ -90,7 +90,7 @@ namespace base85
             i += chunk_size;
         }
 
-        return std::vector<uint8_t>(out.begin(), out.end()); 
+        return out;
     }
 
 }

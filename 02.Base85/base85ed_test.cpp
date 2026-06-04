@@ -30,7 +30,6 @@ static std::vector<uint8_t> cstr2v(const char* s)
     );
 }
 
-
 static std::vector<uint8_t> cast_to_u8(std::vector<uint8_t> const& v)
 {
     return v;
@@ -219,7 +218,6 @@ TEST(Base85Stress, MassiveDataBuffers)
         auto end = std::chrono::high_resolution_clock::now();
 
         EXPECT_EQ(original, dec);
-
 
         auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
         EXPECT_GE(ms, 0);
