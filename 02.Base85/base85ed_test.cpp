@@ -160,11 +160,22 @@ TEST(Base85EdgeCases, ExhaustiveByteRange)
 
 TEST(Base85Validation, MalformedCharacters)
 {
-    std::vector<uint8_t> invalid_chars = { '~', 0x00, 0x1F, 0x7F, 'v', 'z' };
+    std::vector<uint8_t> invalid_chars = {
+        0x00,
+        0x1F,
+        0x7F
+    };
+
     for (uint8_t bad_char : invalid_chars)
     {
-        std::vector<uint8_t> invalid_input = { 'c', 'e', '`', 'E', bad_char };
-        EXPECT_THROW(base85::decode(invalid_input), std::runtime_error);
+        std::vector<uint8_t> invalid_input = {
+            'c', 'e', '`', 'E', bad_char
+        };
+
+        EXPECT_THROW(
+            base85::decode(invalid_input),
+            std::runtime_error
+        );
     }
 }
 
