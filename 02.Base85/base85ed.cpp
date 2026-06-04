@@ -71,14 +71,14 @@ namespace base85
                 {
                     throw std::runtime_error("Invalid character in Base85 string.");
                 }
-                value += (c - '!') * POW85[j];
+                value += (c - '!') * POW85[j + (5 - chunk_size)];
             }
 
             if (chunk_size < 5)
             {
                 for (size_t j = chunk_size; j < 5; ++j)
                 {
-                    value += static_cast<uint32_t>('u' - '!') * POW85[j];
+                    value += static_cast<uint32_t>('u' - '!') * POW85[j + (5 - chunk_size)];
                 }
             }
 
