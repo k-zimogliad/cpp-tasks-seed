@@ -29,10 +29,11 @@ namespace base85
             }
 
             uint8_t encoded_chunk[5];
+            uint32_t temp = value;
             for (int j = 4; j >= 0; --j)
             {
-                encoded_chunk[j] = static_cast<uint8_t>((value % 85) + '!');
-                value /= 85;
+                encoded_chunk[j] = static_cast<uint8_t>((temp % 85) + '!');
+                temp /= 85;
             }
 
             for (size_t j = 0; j < chunk_size + 1; ++j)
@@ -65,12 +66,12 @@ namespace base85
             uint32_t value = 0;
             for (size_t j = 0; j < chunk_size; ++j)
             {
-                uint32_t c = b85str[i + j] & 0xFF; 
+                uint32_t c = b85str[i + j] & 0xFF;
                 if (c < '!' || c > 'u')
                 {
                     throw std::runtime_error("Invalid character in Base85 string.");
                 }
-                value += (c - '!') * POW85[j + (5 - chunk_size)];
+                value += (c - '!') * POW85[j];
             }
 
             if (chunk_size < 5)
