@@ -17,15 +17,13 @@ namespace base85
 
         while (i < len)
         {
-
             size_t chunk_size = len - i;
             if (chunk_size > 4) chunk_size = 4;
 
-   
             uint32_t value = 0;
             for (size_t j = 0; j < 4; ++j)
             {
-                value <<= 8; 
+                value <<= 8;
                 if (j < chunk_size)
                 {
                     value |= bytes[i + j];
@@ -39,16 +37,13 @@ namespace base85
                 continue;
             }
 
-
             uint8_t encoded_chunk[5];
             uint32_t temp = value;
             for (int j = 0; j < 5; ++j)
             {
-
                 encoded_chunk[j] = static_cast<uint8_t>((temp / POW85[j]) % 85 + '!');
                 temp %= POW85[j];
             }
-
 
             size_t chars_to_output = (chunk_size == 4) ? 5 : (chunk_size + 1);
 
@@ -70,10 +65,8 @@ namespace base85
 
         while (i < len)
         {
-
             if (b85str[i] == 'z')
             {
-
                 out.push_back(0);
                 out.push_back(0);
                 out.push_back(0);
@@ -82,7 +75,6 @@ namespace base85
                 continue;
             }
 
-  
             size_t group_size = 0;
             uint32_t value = 0;
 
